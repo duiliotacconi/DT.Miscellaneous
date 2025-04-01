@@ -1,0 +1,81 @@
+name: BankAccount
+description: Test recording
+start:
+  profile: BUSINESS MANAGER EVALUATION
+steps:
+  - type: navigate
+    target:
+      - page: Business Manager Role Center
+      - action: Bank Accounts
+    description: Navigate to <caption>Bank Accounts</caption>
+  - type: page-shown
+    source:
+      page: Bank Account List
+    modal: false
+    runtimeId: boi
+    description: Page <caption>Bank Accounts</caption> was shown.
+  - type: invoke
+    target:
+      - page: Bank Account List
+        runtimeRef: boi
+      - action: Control_New
+    invokeType: New
+    description: Invoke New on <caption>New</caption>
+  - type: page-shown
+    source:
+      page: Bank Account Card
+    modal: false
+    runtimeId: btk
+    description: Page <caption>New - Bank Account Card</caption> was shown.
+  - type: focus
+    target:
+      - page: Bank Account Card
+        runtimeRef: btk
+      - field: No.
+    description: Focus <caption>No.</caption>
+  - type: focus
+    target:
+      - page: Bank Account Card
+        runtimeRef: btk
+      - field: Name
+    description: Focus <caption>Name</caption>
+  - type: input
+    target:
+      - page: Bank Account Card
+        runtimeRef: btk
+      - field: Name
+    value: CREDIT CARD
+    description: Input <value>CREDIT CARD</value> into <caption>Name</caption>
+  - type: focus
+    target:
+      - page: Bank Account Card
+        runtimeRef: btk
+      - field: Bank Branch No.
+    description: Focus <caption>Bank Branch No.</caption>
+  - type: input
+    target:
+      - page: Bank Account Card
+        runtimeRef: btk
+      - field: Bank Account No.
+    value: "123456789"
+    description: Input <value>123456789</value> into <caption>Bank Account No.</caption>
+  - type: close-page
+    target:
+      - page: Bank Account Card
+        runtimeRef: btk
+    description: Close page <caption>New - Bank Account Card</caption>
+  - type: page-closed
+    source:
+      page: Bank Account Card
+    runtimeId: btk
+    description: Page <caption>New - Bank Account Card</caption> was closed.
+  - type: close-page
+    target:
+      - page: Bank Account List
+        runtimeRef: boi
+    description: Close page <caption>Bank Accounts</caption>
+  - type: page-closed
+    source:
+      page: Bank Account List
+    runtimeId: boi
+    description: Page <caption>Bank Accounts</caption> was closed.

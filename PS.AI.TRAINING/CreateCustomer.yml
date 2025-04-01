@@ -1,0 +1,108 @@
+name: CreateCustomer
+description: Test recording
+start:
+  profile: BUSINESS MANAGER EVALUATION
+steps:
+  - type: navigate
+    target:
+      - page: Business Manager Role Center
+      - action: Customers
+    description: Navigate to <caption>Customers</caption>
+  - type: page-shown
+    source:
+      page: Customer List
+    modal: false
+    runtimeId: b7xx
+    description: Page <caption>Customers</caption> was shown.
+  - type: invoke
+    target:
+      - page: Customer List
+        runtimeRef: b7xx
+      - action: Control_New
+    invokeType: New
+    description: Invoke New on <caption>New</caption>
+  - type: page-shown
+    source:
+      page: Select Customer Templ. List
+    modal: true
+    runtimeId: b87i
+    description: Page <caption>Select a template for a new customer</caption> was shown.
+  - type: invoke
+    target:
+      - page: Select Customer Templ. List
+        runtimeRef: b87i
+    invokeType: LookupOk
+    description: Invoke LookupOk on <caption>Select a template for a new customer</caption>
+  - type: page-closed
+    source:
+      page: Select Customer Templ. List
+    runtimeId: b87i
+    description: Page <caption>Select a template for a new customer</caption> was closed.
+  - type: page-shown
+    source:
+      page: Customer Card
+    modal: false
+    runtimeId: b88m
+    description: Page <caption>New - Customer Card</caption> was shown.
+  - type: input
+    target:
+      - page: Customer Card
+        runtimeRef: b88m
+      - field: Name
+    value: MICHAEL JACKSON
+    description: Input <value>MICHAEL JACKSON</value> into <caption>Name</caption>
+  - type: focus
+    target:
+      - page: Customer Card
+        runtimeRef: b88m
+      - field: IC Partner Code
+    description: Focus <caption>IC Partner Code</caption>
+  - type: input
+    target:
+      - page: Customer Card
+        runtimeRef: b88m
+      - field: IC Partner Code
+    value: ""
+    isFilterAsYouType: true
+    description: Input <value></value> into <caption>IC Partner Code</caption>
+  - type: page-shown
+    source:
+      page: null
+      automationId: 8da61efd-0002-0003-0507-0b0d1113171d
+      caption: Confirm
+    modal: true
+    runtimeId: b8jt
+    description: Page <caption>Confirm</caption> was shown.
+  - type: invoke
+    target:
+      - page: null
+        automationId: 8da61efd-0002-0003-0507-0b0d1113171d
+        caption: Confirm
+        runtimeRef: b8jt
+    invokeType: No
+    description: Invoke No on <caption>Confirm</caption>
+  - type: page-closed
+    source:
+      page: null
+    runtimeId: b8jt
+    description: Page <caption>Confirm</caption> was closed.
+  - type: close-page
+    target:
+      - page: Customer Card
+        runtimeRef: b88m
+    description: Close page <caption>New - Customer Card</caption>
+  - type: page-closed
+    source:
+      page: Customer Card
+    runtimeId: b88m
+    description: Page <caption>New - Customer Card</caption> was closed.
+  - type: close-page
+    target:
+      - page: Customer List
+        runtimeRef: b7xx
+    description: Close page <caption>Customers</caption>
+  - type: page-closed
+    source:
+      page: Customer List
+    runtimeId: b7xx
+    description: Page <caption>Customers</caption> was closed.

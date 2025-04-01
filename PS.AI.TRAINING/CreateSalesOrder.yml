@@ -1,0 +1,158 @@
+name: CreateSalesOrder
+description: Test recording
+start:
+  profile: BUSINESS MANAGER EVALUATION
+steps:
+  - type: navigate
+    target:
+      - page: Business Manager Role Center
+      - action: Sales Orders
+    description: Navigate to <caption>Sales Orders</caption>
+  - type: page-shown
+    source:
+      page: Sales Order List
+    modal: false
+    runtimeId: b8k3
+    description: Page <caption>Sales Orders</caption> was shown.
+  - type: invoke
+    target:
+      - page: Sales Order List
+        runtimeRef: b8k3
+      - action: Control_New
+    invokeType: New
+    description: Invoke New on <caption>New</caption>
+  - type: page-shown
+    source:
+      page: Sales Order
+    modal: false
+    runtimeId: b8tx
+    description: Page <caption>New - Sales Order</caption> was shown.
+  - type: focus
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - field: Sell-to Customer No.
+    description: Focus <caption>Customer No.</caption>
+  - type: input
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - field: Sell-to Customer No.
+    value: ""
+    isFilterAsYouType: true
+    description: Input <value></value> into <caption>Customer No.</caption>
+  - type: page-shown
+    source:
+      page: lookup:Sell-to Customer No.
+    modal: false
+    runtimeId: b9fs
+    description: Page <caption>Select</caption> was shown.
+  - type: input
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - field: Sell-to Customer No.
+    value: MICHA
+    isFilterAsYouType: true
+    description: Input <value>MICHA</value> into <caption>Customer No.</caption>
+  - type: invoke
+    target:
+      - page: lookup:Sell-to Customer No.
+        runtimeRef: b9fs
+      - repeater: repeater
+    parameters:
+      AlwaysCommit: true
+    description: Invoke row on <caption>Customer</caption>
+  - type: page-closed
+    source:
+      page: lookup:Sell-to Customer No.
+    runtimeId: b9fs
+    description: Page <caption>Select</caption> was closed.
+  - type: invoke
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - field: Activity Code
+    invokeType: Lookup
+    description: Invoke Lookup on <caption>Activity Code</caption>
+  - type: page-shown
+    source:
+      page: lookup:Activity Code
+    modal: false
+    runtimeId: b9h6
+    description: Page <caption>Select</caption> was shown.
+  - type: input
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - part: SalesLines
+      - page: Sales Order Subform
+      - repeater: Control1
+      - field: No.
+    value: ""
+    isFilterAsYouType: true
+    description: Input <value></value> into <caption>No.</caption>
+  - type: focus
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - part: SalesLines
+      - page: Sales Order Subform
+      - repeater: Control1
+      - field: No.
+    description: Focus <caption>No.</caption>
+  - type: page-closed
+    source:
+      page: lookup:Activity Code
+    runtimeId: b9h6
+    description: Page <caption>Select</caption> was closed.
+  - type: page-shown
+    source:
+      page: lookup:No.
+    modal: false
+    runtimeId: b9ho
+    description: Page <caption>Select</caption> was shown.
+  - type: invoke
+    target:
+      - page: lookup:No.
+        runtimeRef: b9ho
+      - repeater: repeater
+    parameters:
+      AlwaysCommit: true
+    description: Invoke row on <caption>Item</caption>
+  - type: page-closed
+    source:
+      page: lookup:No.
+    runtimeId: b9ho
+    description: Page <caption>Select</caption> was closed.
+  - type: input
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+      - part: SalesLines
+      - page: Sales Order Subform
+      - repeater: Control1
+      - field: Quantity
+    value: "1"
+    description: Input <value>1</value> into <caption>Quantity</caption>
+  - type: close-page
+    target:
+      - page: Sales Order
+        runtimeRef: b8tx
+    description: Close page <caption>New - Sales Order - 101014 ∙ MICHAEL JACKSON</caption>
+  - type: page-closed
+    source:
+      page: Sales Order
+    runtimeId: b8tx
+    description: Page <caption>New - Sales Order - 101014 ∙ MICHAEL
+      JACKSON</caption> was closed.
+  - type: close-page
+    target:
+      - page: Sales Order List
+        runtimeRef: b8k3
+    description: Close page <caption>Sales Orders</caption>
+  - type: page-closed
+    source:
+      page: Sales Order List
+    runtimeId: b8k3
+    description: Page <caption>Sales Orders</caption> was closed.
